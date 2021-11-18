@@ -36,6 +36,8 @@ if Config.Framework == 'esx' then
                             TriggerClientEvent('no1-playerped:client:SetPlayerPed', xTarget.source, pedModel)
                             TriggerClientEvent('chat:addMessage', src, {args = {'^1SYSTEM', ('You have set %s ped to %s!'):format(xTarget.name, pedModel)}})
                         end
+                    else
+                        TriggerClientEvent('chat:addMessage', xPlayer.source, {args = {'^1SYSTEM', 'Invalid Ped Model!'}})
                     end
                 else
                     TriggerClientEvent('chat:addMessage', src, {args = {'^1SYSTEM', 'Invalid PlayerID!'}})
@@ -58,6 +60,8 @@ if Config.Framework == 'esx' then
                             TriggerClientEvent('no1-playerped:client:SetPlayerPed', xTarget.source, args.model)
                             TriggerClientEvent('chat:addMessage', xPlayer.source, {args = {'^1SYSTEM', ('You have set %s ped to %s!'):format(xTarget.name, args.model)}})
                         end
+                    else
+                        TriggerClientEvent('chat:addMessage', xPlayer.source, {args = {'^1SYSTEM', 'Invalid Ped Model!'}})
                     end
                 else
                     TriggerClientEvent('chat:addMessage', xPlayer.source, {args = {'^1SYSTEM', 'Invalid PlayerID!'}})
