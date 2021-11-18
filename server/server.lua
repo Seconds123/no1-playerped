@@ -26,14 +26,16 @@ if Config.Framework == 'esx' then
                 local pedModel = tostring(args[2])
     
                 if xTarget then
-                    SetPlayerPed(xTarget.identifier, pedModel)
+                    if ValidPedModel(pedModel) or pedModel == "none" then
+                        SetPlayerPed(xTarget.identifier, pedModel)
 
-                    if pedModel == "none" then
-                        TriggerClientEvent('no1-playerped:client:ResetPlayerPed', xTarget.source)
-                        TriggerClientEvent('chat:addMessage', src, {args = {'^1SYSTEM', ('You have reset %s ped to default!'):format(xTarget.name)}})
-                    else
-                        TriggerClientEvent('no1-playerped:client:SetPlayerPed', xTarget.source, pedModel)
-                        TriggerClientEvent('chat:addMessage', src, {args = {'^1SYSTEM', ('You have set %s ped to %s!'):format(xTarget.name, pedModel)}})
+                        if pedModel == "none" then
+                            TriggerClientEvent('no1-playerped:client:ResetPlayerPed', xTarget.source)
+                            TriggerClientEvent('chat:addMessage', src, {args = {'^1SYSTEM', ('You have reset %s ped to default!'):format(xTarget.name)}})
+                        else
+                            TriggerClientEvent('no1-playerped:client:SetPlayerPed', xTarget.source, pedModel)
+                            TriggerClientEvent('chat:addMessage', src, {args = {'^1SYSTEM', ('You have set %s ped to %s!'):format(xTarget.name, pedModel)}})
+                        end
                     end
                 else
                     TriggerClientEvent('chat:addMessage', src, {args = {'^1SYSTEM', 'Invalid PlayerID!'}})
@@ -46,14 +48,16 @@ if Config.Framework == 'esx' then
                 local xTarget = ESX.GetPlayerFromId(args.target)
     
                 if xTarget then
-                    SetPlayerPed(xTarget.identifier, args.model)
-    
-                    if args.model == "none" then
-                        TriggerClientEvent('no1-playerped:client:ResetPlayerPed', xTarget.source)
-                        TriggerClientEvent('chat:addMessage', xPlayer.source, {args = {'^1SYSTEM', ('You have reset %s ped to default!'):format(xTarget.name)}})
-                    else
-                        TriggerClientEvent('no1-playerped:client:SetPlayerPed', xTarget.source, args.model)
-                        TriggerClientEvent('chat:addMessage', xPlayer.source, {args = {'^1SYSTEM', ('You have set %s ped to %s!'):format(xTarget.name, args.model)}})
+                    if ValidPedModel(args.model) or args.model == "none" then
+                        SetPlayerPed(xTarget.identifier, args.model)
+        
+                        if args.model == "none" then
+                            TriggerClientEvent('no1-playerped:client:ResetPlayerPed', xTarget.source)
+                            TriggerClientEvent('chat:addMessage', xPlayer.source, {args = {'^1SYSTEM', ('You have reset %s ped to default!'):format(xTarget.name)}})
+                        else
+                            TriggerClientEvent('no1-playerped:client:SetPlayerPed', xTarget.source, args.model)
+                            TriggerClientEvent('chat:addMessage', xPlayer.source, {args = {'^1SYSTEM', ('You have set %s ped to %s!'):format(xTarget.name, args.model)}})
+                        end
                     end
                 else
                     TriggerClientEvent('chat:addMessage', xPlayer.source, {args = {'^1SYSTEM', 'Invalid PlayerID!'}})
@@ -78,5 +82,34 @@ if Config.Framework == 'esx' then
     end)
 elseif Config.Framework == 'qbcore' then
     -- Not done yet
+end
+
+local validModel = false
+
+local function ValidPedModel(pedModel)
+    if pedModel and type(pedModel) == 'string' then
+        for i = 1, #Peds.VanillaList do
+            local validPed = Peds.VanillaList[i]
+            if pedModel == validPed.modelName then
+                --print("Valid Model: ["..tostring(pedModel).."] found.")
+                validModel = true
+                return true
+            end
+        end
+        if Config.allowDLCPeds then
+            for i = 1, #Peds.DLCList do
+                local validPed = Peds.DLCList[i]
+                if pedModel == validPed.modelName then
+                    --print("Valid DLC Model: ["..tostring(pedModel).."] found.")
+                    validModel = true
+                    return true
+                end
+            end
+        end
+        validModel = false
+        if not validModel then --[[print("Ped Model: "..pedModel.." failed model check.")]] return false end
+    else
+        --print("Invaild Model: ["..tostring(pedModel).."].")
+    end
 end
 
