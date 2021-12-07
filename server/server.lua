@@ -90,7 +90,7 @@ end
 
 local validModel = false
 
-local function ValidPedModel(pedModel)
+function ValidPedModel(pedModel)
     if pedModel and type(pedModel) == 'string' then
         for i = 1, #Peds.VanillaList do
             local validPed = Peds.VanillaList[i]
