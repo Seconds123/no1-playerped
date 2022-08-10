@@ -24,6 +24,7 @@ if Config.Framework == 'esx' then
         SetPedDefaultComponentVariation(PlayerPedId())
     
         SetModelAsNoLongerNeeded(hash)
+        TriggerEvent('esx:restoreLoadout')
     end
 
     local function ResetPlayerPed()
