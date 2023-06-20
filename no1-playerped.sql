@@ -1,0 +1,1 @@
+CREATE TABLE `no1_playerpeds` ( `id` INT NOT NULL AUTO_INCREMENT , `identifier` VARCHAR(80) NOT NULL , `ped` VARCHAR(50) NOT NULL , `default` TINYINT(1) NOT NULL DEFAULT 0, PRIMARY KEY (`id`), INDEX (`identifier`)) ENGINE = InnoDB;

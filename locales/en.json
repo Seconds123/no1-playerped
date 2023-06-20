@@ -1,0 +1,21 @@
+{
+    "command_setped": "Give a designated ped to a player",
+    "command_pedmenu": "Shows a list of your owned peds",
+    "playerid": "Player Id",
+    "pedmodel": "Ped Model",
+    "invalidplayerid": "Specified Player is not online",
+    "invalidmodel": "Specified model is not valid!",
+    "pedoptions": "Ped Options",
+    "player": "Player",
+    "option": "Option",
+    "giveped": "Give Ped",
+    "removeped": "Remove Ped",
+    "resetped": "Reset Ped",
+    "resetped_description": "This will reset your ped to your default non ped menu skin.",
+    "nopeds": "The specified player has no peds!",
+    "defaultped": " ➡️ DEFAULT PED ⬅️",
+    "setdefault": " 🖱️ CLICK HERE TO SET THIS PED AS DEFAULT ",
+    "playerdefault": "This ped is the player's default ped",
+    "yourpeds": "Your Peds",
+    "removepedplayer": "%s - %s"
+}
